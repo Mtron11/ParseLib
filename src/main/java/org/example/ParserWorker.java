@@ -1,6 +1,8 @@
 package org.example;
 
 import org.jsoup.nodes.Document;
+import parsers.Parser;
+import parsers.ParserSettings;
 
 import java.io.IOException;
 import java.text.ParseException;

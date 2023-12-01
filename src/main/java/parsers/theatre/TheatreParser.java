@@ -1,9 +1,11 @@
 package parsers.theatre;
 
-import org.example.Parser;
+import parsers.Parser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import parsers.theatre.model.Poster;
 
 import java.io.IOException;
@@ -13,21 +15,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TheatreParser implements Parser<ArrayList<Poster>> {
+    private static final Logger logger = LoggerFactory.getLogger(TheatreParser.class);
     @Override
-    public ArrayList<Poster> Parse(Document document) throws IOException, ParseException {
+    public ArrayList<Poster> Parse(Document document) throws IOException {
+
         ArrayList<Poster> posters = new ArrayList<>();
         Elements postersElements = document.select("div.t_afisha");
 
-        String folderPath = "C:/Users/Mtron/Desktop/Java/ParseLib/images";
+        String folderPath = "C:/Users/Mtron/Desktop/ParseLib/images";
         try{
             Files.createDirectories(Paths.get(folderPath));
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("Failed to create directories for path: {}", folderPath, e);
         }
 
         for(Element poster : postersElements){
@@ -58,7 +61,7 @@ public class TheatreParser implements Parser<ArrayList<Poster>> {
                 // Сохранение
                 Files.copy(in, imagePath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Failed to download images for path: {}", url, e);
             }
         }
         return posters;

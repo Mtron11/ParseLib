@@ -3,15 +3,17 @@ package parsers.ekvus.model;
 public class Afisha {
     private final String title;
     private final String date;
-    private final String duration;
     private final String ageLimit;
+    private final String imageUrl;
+    private final String duration;
 
 
-    public Afisha(String title, String date, String duration, String ageLimit) {
+    public Afisha(String title, String date, String ageLimit, String duration, String imageUrl) {
         this.title = title;
         this.date = date;
-        this.duration = duration;
         this.ageLimit = ageLimit;
+        this.imageUrl = imageUrl;
+        this.duration = duration;
     }
 
 
@@ -20,9 +22,6 @@ public class Afisha {
     }
     public String getDate(){
         return date;
-    }
-    public String getDuration(){
-        return duration;
     }
 
     public String getAgeLimit(){
@@ -33,7 +32,8 @@ public class Afisha {
     public String toString() {
         return  "title= " + title + "\n" +
                 "date= " + date + "\n" +
-                "duration=  " + duration + "\n" +
+                "imageUrl= " + imageUrl + "\n" +
+                "duration= " + duration + "\n" +
                 "ageLimit= " + ageLimit + "\n" +
                 "\n";
 

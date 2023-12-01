@@ -1,5 +1,8 @@
 package org.example;
+import parsers.Completed;
+import parsers.NewData;
 import parsers.ekvus.EkvusParser;
+import parsers.ekvus.EkvusSettings;
 import parsers.ekvus.model.Afisha;
 import parsers.habr.HabrParser;
 import parsers.habr.HabrSettings;
@@ -14,8 +17,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException, ParseException {
-        ParserWorker<ArrayList<Afisha>>  parser = new ParserWorker<>(new EkvusParser());
-        parser.setParserSettings(new TheatreSettings(1,1));
+        ParserWorker<ArrayList<Afisha>> parser = new ParserWorker<>(new EkvusParser());
+        parser.setParserSettings(new EkvusSettings());
         parser.onCompletedList.add(new Completed());
         parser.onNewDataList.add(new NewData());
 

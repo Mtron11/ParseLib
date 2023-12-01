@@ -1,4 +1,4 @@
-package org.example;
+package parsers;
 
 import org.jsoup.nodes.Document;
 

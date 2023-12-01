@@ -1,4 +1,4 @@
-package org.example;
+package parsers;
 
 public abstract class ParserSettings {
 

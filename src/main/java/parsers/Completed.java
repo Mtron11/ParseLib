@@ -1,4 +1,6 @@
-package org.example;
+package parsers;
+
+import org.example.ParserWorker;
 
 public class Completed implements ParserWorker.OnCompleted {
     @Override

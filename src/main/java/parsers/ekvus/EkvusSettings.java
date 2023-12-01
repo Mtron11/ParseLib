@@ -1,12 +1,12 @@
 package parsers.ekvus;
 
-import org.example.ParserSettings;
+import parsers.ParserSettings;
 
 public class EkvusSettings extends ParserSettings {
-    public EkvusSettings(int start, int end){
-        startPoint = start;
-        endPoint = end;
+    public EkvusSettings(){
+        startPoint = 1;
+        endPoint = 1;
         BASE_URL = "https://ekvus-kirov.ru/afisha";
-        PREFIX = "page{CurrentId}";
+        PREFIX = "";
     }
 }

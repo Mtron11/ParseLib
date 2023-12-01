@@ -2,6 +2,7 @@ package org.example;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import parsers.ParserSettings;
 
 import java.io.IOException;
 
@@ -11,7 +12,7 @@ public class HtmlLoader {
 
     public HtmlLoader(ParserSettings settings)
     {
-        url = settings.BASE_URL;
+        url = settings.BASE_URL+"/"+ settings.PREFIX;
     }
 
     public Document GetSourceByPageId(int id) throws IOException {

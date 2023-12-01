@@ -1,7 +1,7 @@
 package parsers.habr;
 
 import parsers.habr.model.Article;
-import org.example.Parser;
+import parsers.Parser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -21,7 +21,7 @@ public class HabrParser implements Parser<ArrayList<Article>> {
         ArrayList<Article> articles = new ArrayList<>();
         Elements articleElements = document.select("article");
 
-        String folderPath = "C:/Users/Mtron/Desktop/Java/ParseLib/images";
+        String folderPath = "C:/Users/Mtron/Desktop/ParseLib/images";
         try {
             Files.createDirectories(Paths.get(folderPath));
         } catch (IOException e) {
