@@ -1,6 +1,9 @@
 package parsers.ekvus;
 
+import org.example.ParserWorker;
 import org.jsoup.Jsoup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import parsers.Parser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,8 +20,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 public class EkvusParser implements Parser<ArrayList<Afisha>> {
+    private static final Logger logger = LoggerFactory.getLogger(EkvusParser.class);
     @Override
-    public ArrayList<Afisha> Parse(Document document) throws IOException {
+    public ArrayList<Afisha> Parse(Document document, ParserWorker.OnNewDataHandler handler) throws IOException {
         ArrayList<Afisha> posters = new ArrayList<>();
         Elements postersElements = document.getElementsByClass("page_box").get(0).getElementsByTag("table").get(0).getElementsByTag("tr");
 
@@ -26,7 +30,7 @@ public class EkvusParser implements Parser<ArrayList<Afisha>> {
         try {
             Files.createDirectories(Paths.get(folderPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to create directories for path: {}", folderPath, e);
         }
 
         for(Element poster : postersElements){
@@ -42,6 +46,7 @@ public class EkvusParser implements Parser<ArrayList<Afisha>> {
             String imageUrl = getImageUrl(posterDocument);
 
             posters.add(new Afisha(title, date, ageLimit, duration, imageUrl));
+            handler.onNewData(this, new Afisha(title, date, ageLimit, duration, imageUrl));
             URL url = new URL(imageUrl);
 
             // поток скачать
@@ -55,7 +60,7 @@ public class EkvusParser implements Parser<ArrayList<Afisha>> {
                 // Сохранение
                 Files.copy(in, imagePath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Failed to download images for path: {}", url, e);
             }
         }
         return posters;

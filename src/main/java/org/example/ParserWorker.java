@@ -1,5 +1,7 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jsoup.nodes.Document;
 import parsers.Parser;
 import parsers.ParserSettings;
@@ -9,15 +11,19 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class ParserWorker <T>{
-
+    @Getter
+    @Setter
     Parser<T> parser;
+    @Getter
     ParserSettings parserSettings;
     HtmlLoader loader;
     boolean isActive;
-    ArrayList<OnNewDataHandler> onNewDataList = new ArrayList<>();
-    ArrayList<OnCompleted> onCompletedList = new ArrayList<>();
-    public ParserWorker(Parser<T> parser) {
+    public ArrayList<OnNewDataHandler> onNewDataList = new ArrayList<>();
+    public ArrayList<OnCompleted> onCompletedList = new ArrayList<>();
+    public ParserWorker(Parser<T> parser, ParserSettings parserSettings) {
         this.parser = parser;
+        this.parserSettings = parserSettings;
+        loader = new HtmlLoader(parserSettings);
     }
 
     private void worker() throws IOException, ParseException {
@@ -27,7 +33,7 @@ public class ParserWorker <T>{
                 return;
             }
             Document document = loader.GetSourceByPageId(i);
-            T result = parser.Parse(document);
+            T result = parser.Parse(document, onNewDataList.get(0));
             onNewDataList.get(0).onNewData(this,result);
         }
         onCompletedList.get(0).onCompleted(this);
@@ -42,29 +48,10 @@ public class ParserWorker <T>{
         isActive = false;
     }
 
-    public void setParser(Parser<T> parser) {
-        this.parser = parser;
-    }
-
-    public void setParserSettings(ParserSettings parserSettings) {
-        this.parserSettings = parserSettings;
-        loader = new HtmlLoader(parserSettings);
-    }
-
-    public ParserSettings getParserSettings() {
-        return parserSettings;
-    }
-
-    public Parser<T> getParser() {
-        return parser;
-    }
     public interface OnNewDataHandler<T> {
-        void onNewData(Object sender, T e);
+        void onNewData(Object sender, T e) throws IOException;
     }
     public interface OnCompleted {
         void onCompleted(Object sender);
     }
-
-
-
 }

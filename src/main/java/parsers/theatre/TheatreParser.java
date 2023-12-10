@@ -1,5 +1,6 @@
 package parsers.theatre;
 
+import org.example.ParserWorker;
 import parsers.Parser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class TheatreParser implements Parser<ArrayList<Poster>> {
     private static final Logger logger = LoggerFactory.getLogger(TheatreParser.class);
     @Override
-    public ArrayList<Poster> Parse(Document document) throws IOException {
+    public ArrayList<Poster> Parse(Document document, ParserWorker.OnNewDataHandler handler) throws IOException {
 
         ArrayList<Poster> posters = new ArrayList<>();
         Elements postersElements = document.select("div.t_afisha");

@@ -1,0 +1,20 @@
+
+Q
+java:S3740S"/Provide the parametrized type for this generic.(ÃŒƒòûÿÿÿÿ8ÙÒ–Ä1
+E
+java:S1948"(Make "parser" transient or serializable.(ÊÖÚ¥8‰Ó–Ä1
+M
+java:S1948"0Make "downloadThread" transient or serializable.(ı¯Ã8‰Ó–Ä1
+k
+java:S3252"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(Õû»öşÿÿÿÿ8Ó–Ä1
+L	java:S106W"+Replace this use of System.out by a logger.(ƒ­µ°ùÿÿÿÿ8ŸÓ–Ä1
+C
+java:S1659u"!Declare "end" on a separate line.(ÍôÁÑıÿÿÿÿ8¦Ó–Ä1
+^	java:S125š"<This block of commented-out lines of code should be removed.(—Ï—Óøÿÿÿÿ8ö€šÄ1
+Y	java:S125§"<This block of commented-out lines of code should be removed.(í»Êó8Ä®šÄ1
+O
+java:S1128"2Remove this unused import 'javax.imageio.ImageIO'.(‘çÔû8Ò®šÄ1
+[
+java:S1128"9Remove this unused import 'java.awt.image.BufferedImage'.(×íĞ‡şÿÿÿÿ8Ô®šÄ1
+F
+java:S1128")Remove this unused import 'java.io.File'.(†Ğ¥Å8Ö®šÄ1

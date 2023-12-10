@@ -1,5 +1,8 @@
 package parsers.habr;
 
+import org.example.ParserWorker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import parsers.habr.model.Article;
 import parsers.Parser;
 import org.jsoup.nodes.Document;
@@ -16,8 +19,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 public class HabrParser implements Parser<ArrayList<Article>> {
+    private static final Logger logger = LoggerFactory.getLogger(HabrParser.class);
     @Override
-    public ArrayList<Article> Parse(Document document) throws IOException {
+    public ArrayList<Article> Parse(Document document, ParserWorker.OnNewDataHandler handler) throws IOException {
         ArrayList<Article> articles = new ArrayList<>();
         Elements articleElements = document.select("article");
 
@@ -25,13 +29,14 @@ public class HabrParser implements Parser<ArrayList<Article>> {
         try {
             Files.createDirectories(Paths.get(folderPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to create directories for path: {}", folderPath, e);
         }
         for (Element articleElement : articleElements) {
             String title = articleElement.select("h2").text();
             String text = articleElement.select("div.article-formatted-body").text();
             String imageUrl = articleElement.select("img.tm-article-snippet__lead-image").attr("src");
             articles.add(new Article(title, text, imageUrl));
+            handler.onNewData(this, new Article(title, text, imageUrl));
             if (imageUrl.startsWith("https")) {
                 // объект URL для изображения
                 URL url = new URL(imageUrl);
@@ -47,7 +52,7 @@ public class HabrParser implements Parser<ArrayList<Article>> {
                     // Сохранение
                     Files.copy(in, imagePath, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("Failed to download images for path: {}", url, e);
                 }
             }
         }

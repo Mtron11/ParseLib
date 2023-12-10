@@ -1,3 +1,11 @@
 
-E
-java:S3740"/Provide the parametrized type for this generic.(Š·¢§
+L
+java:S3740"/Provide the parametrized type for this generic.(˜ÿú¥8à°ÿÄ1
+Š
+java:S1319"mThe type of "onNewDataList" should be an interface such as "List" rather than the implementation "ArrayList".(˜ÿú¥8â°ÿÄ1
+‘
+java:S1319"oThe type of "onCompletedList" should be an interface such as "List" rather than the implementation "ArrayList".(²ğÑ¨ûÿÿÿÿ8â°ÿÄ1
+v
+java:S1104"YMake onNewDataList a static final constant or non-public and provide accessors if needed.(˜ÿú¥8ã°ÿÄ1
+}
+java:S1104"[Make onCompletedList a static final constant or non-public and provide accessors if needed.(²ğÑ¨ûÿÿÿÿ8ã°ÿÄ1

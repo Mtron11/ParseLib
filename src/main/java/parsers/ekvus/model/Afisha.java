@@ -16,18 +16,6 @@ public class Afisha {
         this.duration = duration;
     }
 
-
-    public String getTitle() {
-        return title;
-    }
-    public String getDate(){
-        return date;
-    }
-
-    public String getAgeLimit(){
-        return ageLimit;
-    }
-
     @Override
     public String toString() {
         return  "title= " + title + "\n" +

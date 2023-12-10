@@ -16,24 +16,6 @@ public class Poster {
         this.ageLimit = ageLimit;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public String getDate(){
-        return date;
-    }
-    public String getDuration(){
-        return duration;
-    }
-
-    public String getAgeLimit(){
-        return ageLimit;
-    }
-
     @Override
     public String toString() {
         return  "title= " + title + "\n" +
